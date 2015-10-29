@@ -16,5 +16,29 @@
 	
 </head>
 <body>
+  <!-- Initiate app -->
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <!-- Form -->
+    <div class="container" name="songForm">
+      <h1>Spotify Track Search</h1>
+      <div class="col-md-6">
+        <h2>Search</h2>
+        <form action="#">
+          <label>Tracks:</label>
+          <input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
+          <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="button">Search</button>
+        </form>
+        <!-- Only show results when we have them -->
+        <div ng-show="tracks">
+          <!-- Show each track, and create and element for it -->
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h2> Favorite Songs </h2>
+        <!-- Show all of our favorite songs in the other column -->
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -8,35 +8,22 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   $scope.currentSong = null;
   // These are the tracks that persist between multiple queries, and appear in
   // the favorites section
-  // Use Local storage to persist across sessions
-  $scope.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  // These are the tracks that represent the current query
-  $scope.tracks = []
+  $scope.favorites = [];
+  // If you want to get REALLY fancy, then you could use localStorage so that
+  // favorites don't disapear on a page refresh!
 
-  // Saves the value of our favorites to localStorage
-  function persistFavs() {
-    localStorage.setItem('favorites', JSON.stringify($scope.favorites));
-  }
+  // These are the tracks that represent the current query
+  $scope.tracks = [];
 
   // Adds a given song to our favorites, so we can play it whenever we want
   $scope.addToFavorites = function(favTrack) {
-    // Add it to our favorites
-    $scope.favorites.push(favTrack);
-    persistFavs();
-    // But also remove it from the search section
-    $scope.tracks = _.filter($scope.tracks, function(track) {
-      return track !== favTrack;
-    });
   }
 
   // Removes a given track from our favorites list
   $scope.removeFromFavorites = function(removeTrack) {
-    $scope.favorites = _.filter($scope.favorites, function(track) {
-      return track !== removeTrack;
-    });
-    persistFavs();
   }
 
+  // Uses the $http service to make a request to spotify and get our songs
   $scope.getSongs = function() {
     // This makes a request to the spotify API, and then searches for the
     // input track
@@ -50,17 +37,18 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     function succ(response) {
       // THEN if everything is successful, we add the results to our view
       console.log('successful response!');
-      // If we want to get more results, just make a request with this url
-      nextUrl = response.data.tracks.next;
-      $scope.tracks = _.map(data, function(track) {
-        var imgUrl = track.album.images[0].url || '';
-        return {
-          'title': track.name,
-          'img': imgUrl || '',
-          'artist': track.artists[0].name,
-          'preview': track.preview_url
-        }
-      });
+
+      // Use the response and modify the $scope.tracks variable so that it
+      // contains objects with the follwing properties
+      // {title: "Name of the song",
+      //  img: "URL to the album cover art image",
+      //  artist: "Name of the artist",
+      //  preview: "URL to Audio preview"}
+      //
+      // You can name those properties whatever you want BUT the play()
+      // function expects the preview property.
+      // Hint: lodash can make creating this object pretty easy :)
+      $scope.tracks = null;
     }
 
     function fail() {

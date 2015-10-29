@@ -19,6 +19,6 @@ h1, h2, h3 {
   opacity: 	0.5;
 }
 
-.tracks {
-  background-color: #AAA;
+.tracks .btn {
+  margin-left: 2.5em;
 }

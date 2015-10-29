@@ -10,6 +10,8 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
+
+    <link rel="stylesheet" href="app.css"/>
 	
 	<!-- our code: Webpack takes care of everything -->
 	<script src="app.js"></script>
@@ -29,21 +31,25 @@
           <button type="submit" class="btn btn-primary" type="button">Search</button>
         </form>
         <!-- Only show results when we have them -->
-        <div ng-class="tracks" ng-show="tracks" ng-repeat="track in tracks">
+        <div class="tracks" ng-show="tracks" ng-repeat="track in tracks">
           <!-- Show each track, and create and element for it -->
-          <h3>{{track.title}}</h3>
-          <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
-          <button ng-click="addToFavorites(track)" class="btn btn-primary">Favorite</button>
+          <div class="well">
+            <h3>{{track.title}}</h3>
+            <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
+            <button ng-click="addToFavorites(track)" class="btn btn-primary">Favorite</button>
+          </div>
         </div>
       </div>
 
       <div class="col-md-6">
         <h2> Favorite Songs </h2>
-        <div ng-class="tracks" ng-show="favorites" ng-repeat="track in favorites">
+        <div class="tracks" ng-show="favorites" ng-repeat="track in favorites">
           <!-- Show each track, and create and element for it -->
-          <h3>{{track.title}}</h3>
-          <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
-          <button ng-click="addToFavorites(track)" class="btn btn-danger">Remove</button>
+          <div class="well">
+            <h3>{{track.title}}</h3>
+            <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
+            <button ng-click="addToFavorites(track)" class="btn btn-danger">Remove</button>
+          </div>
         </div>
       </div>
       </div>

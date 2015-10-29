@@ -1,28 +1,23 @@
-<body>
 <!-- Initiate app -->
 <div ng-app="myApp" ng-controller="myCtrl">
-	<!-- Form -->
-	<div class="container">
-	<h1>Spotify Album Search</h1>	
-		<div class="row">
-			<div class="col-md-6">
-				<h2>Album Search</h2>
-				<form name="songForm">
-				<div class="form-group">
-					<label>Spotify search:</label>
-					<input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
-				</div>
-				<div class="form-group">
-					<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
-				</div>
-			</div>	
-			<div class="col-md-6">
-				<h2>Favorite Albums</h2>
-			</div>
-		</div>
-	</form>
+  <!-- Form -->
+  <div class="container" name="songForm">
+    <h1>Spotify Album Catcher</h1>
+    <div class="col-md-6">
+      <form action="#">
+        <label>Spotify search:</label>
+        <input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
+        <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="button">Submit</button>
+      </form>
+      <!-- Only show results when we have them -->
+      <div ng-show="tracks">
+        <!-- Show each track, and create and element for it -->
+        <div ng-repeat="track in tracks">
+          <h3 class="track">{{track.title}} - {{track.artist}}</h3> 
+
+          <img class="album" ng-src="{{track.url}}" alt=""/>
+        </div> 
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</body>

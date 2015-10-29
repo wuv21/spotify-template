@@ -10,18 +10,46 @@ document.write(html);
 var angular = require('angular');
 
 var data;
-var baseUrl = 'https://api.spotify.com/v1/search?type=track&query='
-var myApp = angular.module('myApp', [])
+var nextUrl;
+var baseUrl = 'https://api.spotify.com/v1/search';
+var myApp = angular.module('myApp', []);
 
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   $scope.audioObject = {}
-  console.log('controller loaded successfully');
+
   $scope.getSongs = function() {
-    $http.get(baseUrl + $scope.track).success(function(response){
-      data = $scope.tracks = response.tracks.items
-      console.log('Hey we got this to work');      
-    })
+    // This makes a request to the spotify API, and then searches for the
+    // input track
+    $http.get(baseUrl, {
+      params: {
+        'q': $scope.track,
+        'type': 'track'
+      }
+    }).then(succ, fail);
+
+    function succ(response) {
+      // THEN if everything is successful, we add the results to our view
+      console.log('successful response!');
+      data = response.data.tracks.items;
+      // If we want to get more results, just make a request with this url
+      nextUrl = response.data.tracks.next;
+      $scope.tracks = _.map(data, function(track) {
+        var imgUrl = track.album.images[0].url;
+        return {
+          'title': track.name,
+          'url': imgUrl,
+          'artist': track.artists[0].name
+        }
+      });
+    }
+
+    function fail() {
+      // But if it fails, we print a little error message to the console.
+      console.error('uh oh, our request failed! Try again?');
+    }
+
   }
+
   $scope.play = function(song) {
     if($scope.currentSong == song) {
       $scope.audioObject.pause()
@@ -35,4 +63,4 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       $scope.currentSong = song
     }
   }
-})
+});

@@ -1,12 +1,11 @@
 module.exports = {
-	entry: "./app.js",
+	entry: "./entry.js",
 	output: {
 		path: __dirname,
 		filename: "bundle.js"
 	},
-	// Makes debugging 100x easier
-	devtool: "source-map",
-	externals: [
-		"angular"
-	]
+	externals: {
+	    "angular": "angular",
+	    "lodash": "_"
+	}
 }

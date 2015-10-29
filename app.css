@@ -9,3 +9,8 @@ h1, h2, h3 {
   font-weight: 300;
   font-family: 'Open Sans Condensed';
 }
+
+.album {
+  width: 300px;
+  height: 300px;
+}

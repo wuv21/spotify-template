@@ -9,6 +9,15 @@
         <input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
         <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="button">Submit</button>
       </form>
+      <!-- Only show results when we have them -->
+      <div ng-show="tracks">
+        <!-- Show each track, and create and element for it -->
+        <div ng-repeat="track in tracks">
+          <h3 class="track">{{track.title}} - {{track.artist}}</h3> 
+
+          <img class="album" ng-src="{{track.url}}" alt=""/>
+        </div> 
+      </div>
     </div>
   </div>
 </div>

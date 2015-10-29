@@ -6,5 +6,6 @@ document.write(html);
 require('style!css!./app.css');
 
 // Add our script(s)
-require('angular');
+var angular = require('angular');
+//var _ = require('lodash');
 require('./app.js');

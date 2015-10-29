@@ -4,7 +4,8 @@ module.exports = {
 		path: __dirname,
 		filename: "bundle.js"
 	},
-	externals: [
-		"angular"
-	]
+	externals: {
+    "angular": "angular",
+    "lodash": "_"
+	}
 }

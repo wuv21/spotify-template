@@ -12,7 +12,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
 	
 	<!-- our code: Webpack takes care of everything -->
-	<script src="bundle.js"></script>
+	<script src="app.js"></script>
 	
 </head>
 <body>
@@ -23,10 +23,10 @@
       <h1>Spotify Track Search</h1>
       <div class="col-md-6">
         <h2>Search</h2>
-        <form action="#">
+        <form ng-submit="getSongs()">
           <label>Tracks:</label>
           <input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
-          <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="button">Search</button>
+          <button type="submit" class="btn btn-primary" type="button">Search</button>
         </form>
         <!-- Only show results when we have them -->
         <div ng-show="tracks">

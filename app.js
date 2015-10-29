@@ -51,9 +51,9 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       $scope.tracks = null;
     }
 
-    function fail() {
+    function fail(response) {
       // But if it fails, we print a little error message to the console.
-      console.error('uh oh, our request failed! Try again?');
+      console.error('Spotify returned an error: ' + response.data.error.message);
     }
 
   }

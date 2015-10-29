@@ -29,14 +29,23 @@
           <button type="submit" class="btn btn-primary" type="button">Search</button>
         </form>
         <!-- Only show results when we have them -->
-        <div ng-show="tracks">
+        <div ng-class="tracks" ng-show="tracks" ng-repeat="track in tracks">
           <!-- Show each track, and create and element for it -->
+          <h3>{{track.title}}</h3>
+          <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
+          <button ng-click="addToFavorites(track)" class="btn btn-primary">Favorite</button>
         </div>
       </div>
 
       <div class="col-md-6">
         <h2> Favorite Songs </h2>
-        <!-- Show all of our favorite songs in the other column -->
+        <div ng-class="tracks" ng-show="favorites" ng-repeat="track in favorites">
+          <!-- Show each track, and create and element for it -->
+          <h3>{{track.title}}</h3>
+          <a ng-click="play(track)"><img ng-src="{{track.img}}" alt=""/></a>
+          <button ng-click="addToFavorites(track)" class="btn btn-danger">Remove</button>
+        </div>
+      </div>
       </div>
     </div>
   </div>

@@ -37,6 +37,10 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
     function succ(response) {
       // THEN if everything is successful, we add the results to our view
       console.log('successful response!');
+      //full result data is written to the log so you can see what comes back
+      //use the console to inspect this data to find the properties described
+      //in the next comment 
+      console.log(response.data);
 
       // Use the response and modify the $scope.tracks variable so that it
       // contains objects with the follwing properties
